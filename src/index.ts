@@ -40,15 +40,16 @@ export default class NetworkDeviceModule {
     static async setIpAddress(addressInfo: IDevAddressToWrite) {
         // connection 정보를 얻는다.
         const connectionStat = await getActiveConnections();
+        // console.log({connectionStat});
         // 정보를 담은 객체 배열로 파싱한다.
         const connectObjs = getNetworkInfoFromConnections(connectionStat);
-        console.log(connectObjs)
+        // console.log(connectObjs)
         // addressInfo에서 지정한 device 정보로 uuid를 찾는다.
         const connObj = connectObjs.filter(conn => conn.device === addressInfo.device);
         const uuid = connObj[0].uuid;
-        console.log({ uuid });
+        // console.log({ uuid });
         const formatted = formatDevAddress(addressInfo);
-        console.log(formatted);
+        // console.log(formatted);
         await this.networkOps.modifyDevAddress(uuid, formatted);
         await this.networkOps.applyDevAddress(addressInfo.device);
     }
@@ -71,13 +72,13 @@ export default class NetworkDeviceModule {
         const connectionStat = await getActiveConnections();
         // 정보를 담은 객체 배열로 파싱한다.
         const connectObjs = getNetworkInfoFromConnections(connectionStat);
-        console.log(connectObjs)
+        // console.log(connectObjs)
         // addressInfo에서 지정한 device 정보로 uuid를 찾는다.
         const connObj = connectObjs.filter(conn => conn.device === addressInfo.device);
         const uuid = connObj[0].uuid;
-        console.log({ uuid });
+        // console.log({ uuid });
         const formatted = formatDevAddress(addressInfo);
-        console.log(formatted);
+        // console.log(formatted);
         await this.networkOps.modifyDevAddress(uuid, formatted);
         await this.networkOps.applyDevAddress(addressInfo.device);
     }    

@@ -44,3 +44,23 @@ export interface IDevAddressV6ToWrite {
     gateway?: string;
     dns?: string[];
 }
+
+export function formatDevAddressV6(devAddress: IDevAddressV6ToWrite): string {
+    //const subnetCIDR = subnetMaskToCIDR(devAddress.subnet || "255.255.255.0");
+    const subnetPrefix = devAddress.subnetPrefix || 64;
+
+    let result = "";
+    if (devAddress.address) {
+        result = `ipv6.address ${devAddress.address}/${subnetPrefix} `;
+    }
+
+    if (devAddress.gateway) {
+        result += `ipv6.gateway ${devAddress.gateway} `;
+    }
+
+    if (devAddress.dns) {
+        result += `ipv6.dns "${devAddress.dns.join(' ')}" `;
+    }
+
+    return result.trim();
+}

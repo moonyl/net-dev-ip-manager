@@ -6,7 +6,7 @@ export interface NetworkInfo {
 }
 
 export function getNetworkInfoFromConnections(content: string): NetworkInfo[] {
-    // console.log(content);
+    // console.log({content});
     const lines = content.split('\n');
     const titles = lines[0].trim().split(/\s{2,}/);
     const data = lines.slice(1);
