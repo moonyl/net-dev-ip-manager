@@ -7,7 +7,6 @@
   "scripts": {
     "build": "npm run build:lib && npm run build:types",
     "build:lib": "tsc",
-    "build:types": "tsc -p tsconfig.types.json",
     "test": "jest"
   },
   "keywords": [
