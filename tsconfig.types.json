@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    /* Emit */
+    "declaration": true, /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+    "emitDeclarationOnly": true, /* Create sourcemaps for d.ts files. */
+    "outDir": "./lib/types", /* Specify an output folder for all emitted files. */
+  }
+}

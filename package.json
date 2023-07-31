@@ -1,0 +1,31 @@
+{
+  "name": "net-dev-ip-manager",
+  "version": "0.0.1",
+  "description": "Modules that manage IP-related settings for network devices",
+  "main": "./lib",
+  "types": "./lib/types/index.d.ts",
+  "scripts": {
+    "build": "npm run build:lib && npm run build:types",
+    "build:lib": "tsc",
+    "build:types": "tsc -p tsconfig.types.json",
+    "test": "jest"
+  },
+  "keywords": [
+    "network",
+    "device",
+    "ip",
+    "management"
+  ],
+  "author": {
+    "name": "Sang Moon, Lee",
+    "email": "moonysl@hanmail.net",
+    "url": "https://github.com/moonyl"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "jest": "^29.6.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  }
+}
