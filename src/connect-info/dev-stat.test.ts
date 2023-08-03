@@ -167,6 +167,6 @@ IP6.ROUTE[1]:                           dst = fe80::/64, nh = ::, mt = 100`;
         ]
         const result = await getDeviceStats(inputNetworkInfo);
         expect(result).toEqual(expectedOutput);
-    })
+    });
 
 });

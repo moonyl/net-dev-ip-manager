@@ -2,13 +2,20 @@
   "name": "net-dev-ip-manager",
   "version": "0.0.1",
   "description": "Modules that manage IP-related settings for network devices",
-  "main": "./lib",
+  "main": "./lib/cjs",
+  "module": "./lib/esm",
   "types": "./lib/types/index.d.ts",
   "scripts": {
-    "build": "npm run build:lib && npm run build:types",
-    "build:lib": "tsc",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "build:cjs": "node tools/cleanup cjs && tsc -p config/tsconfig.cjs.json",
+    "build:esm": "node tools/cleanup esm && tsc -p config/tsconfig.esm.json",
+    "build:types": "node tools/cleanup types && tsc -p config/tsconfig.types.json",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:integ": "jest --config=jest.integration.config.js",
+    "clean": "node tools/cleanup",
+    "package": "npm run build && npm pack"
   },
   "keywords": [
     "network",

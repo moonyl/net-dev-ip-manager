@@ -81,3 +81,4 @@ export async function getDeviceStats(connectObjs: NetworkInfo[]): Promise<IDevAd
     // console.log(devAddresses)
     return devAddresses;
 }
+

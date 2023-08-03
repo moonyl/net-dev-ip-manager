@@ -22,6 +22,5 @@ describe("NetworkInfo", () => {
 
         const result = getNetworkInfoFromConnections(inputConnections);
         expect(result).toEqual(expectedOutput);
-
     })
 })
