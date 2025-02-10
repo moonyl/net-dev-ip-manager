@@ -1,22 +1,27 @@
 {
   "name": "net-dev-ip-manager",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Modules that manage IP-related settings for network devices",
   "main": "./lib/cjs",
   "module": "./lib/esm",
   "types": "./lib/types/index.d.ts",
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "npm run build:cjs && npm run build:esm && npm run build:types",
-    "build:cjs": "node tools/cleanup cjs && tsc -p config/tsconfig.cjs.json",
-    "build:esm": "node tools/cleanup esm && tsc -p config/tsconfig.esm.json",
-    "build:types": "node tools/cleanup types && tsc -p config/tsconfig.types.json",
+    "build:cjs": "tsc -p config/tsconfig.cjs.json",
+    "build:esm": "tsc -p config/tsconfig.esm.json",
+    "build:types": "tsc -p config/tsconfig.types.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:integ": "jest --config=jest.integration.config.js",
     "clean": "node tools/cleanup",
+    "prepack": "echo 'Ensuring lib directory exists before packing'",
     "package": "npm run build && npm pack"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "network",
     "device",
@@ -25,7 +30,7 @@
   ],
   "author": {
     "name": "Sang Moon, Lee",
-    "email": "moonysl@hanmail.net",
+    "email": "moonysl@naver.com",
     "url": "https://github.com/moonyl"
   },
   "license": "MIT",

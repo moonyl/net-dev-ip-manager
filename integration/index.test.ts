@@ -16,7 +16,7 @@ describe("command", () => {
 describe("dev configuration", () => {
     test("ethernet 장치들로부터 정보를 가져온다.", async () => {
         const result = await NetworkDeviceModule.getIpAddress();
-        // console.log(result);
+        console.log(result);
         expect(result).not.toBeNull();
     })
 });

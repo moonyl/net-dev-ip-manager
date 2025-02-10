@@ -1,4 +1,4 @@
 node_modules/
 lib/
 coverage/
-net-dev-ip-manager-0.0.1.tgz
+net-dev-ip-manager-*.tgz

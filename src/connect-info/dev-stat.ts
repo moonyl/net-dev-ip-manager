@@ -17,8 +17,8 @@ export function parseDeviceStat(stat: string): Record<string, string> {
 }
 
 export interface IPInfo {
-    ipAddress: string;
-    subnet: string;
+    ipAddress: string | null;
+    subnet: string | null;
 }
 
 export function getSubnetMask(prefix: number): string {
@@ -33,7 +33,10 @@ export function getSubnetMask(prefix: number): string {
 }
 
 export function extractIPInfo(input: string): IPInfo {
-    // console.log({ input })
+    console.log({ input })
+    if (!input) {
+        return { ipAddress: null, subnet: null };
+    }
     const [ipAddress, subnetPrefix] = input.split('/');
     const subnetMask = getSubnetMask(parseInt(subnetPrefix, 10));
     return { ipAddress, subnet: subnetMask };
@@ -42,8 +45,8 @@ export function extractIPInfo(input: string): IPInfo {
 
 export interface IDevAddress {
     device: string;
-    address: string;
-    subnet: string;
+    address: string | null;
+    subnet: string | null;
     gateway: string;
     dns: string[];
     mac: string;
@@ -79,6 +82,7 @@ export async function getDeviceStats(connectObjs: NetworkInfo[]): Promise<IDevAd
 
     const devAddresses: IDevAddress[] = records.map(record => extractDevAddress(record));
     // console.log(devAddresses)
+    // return devAddresses.filter(dev => dev.address !== null);
     return devAddresses;
 }
 
