@@ -36,3 +36,11 @@ export function formatDevAddress(devAddress: IDevAddressToWrite): string {
 
     return result.trim();
 }
+
+export interface IDevAddressV6ToWrite { 
+    device: string;
+    address?: string;
+    subnetPrefix?: number;
+    gateway?: string;
+    dns?: string[];
+}

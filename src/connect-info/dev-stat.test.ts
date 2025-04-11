@@ -1,5 +1,5 @@
 import { NetworkInfo } from "./connection";
-import { IDevAddress, extractDevAddress, extractIPInfo, getDeviceStats, getSubnetMask, parseDeviceStat } from "./dev-stat"
+import { IDevAddress, IDevAddressV6, extractDevAddress, extractDevAddressV6, extractIPInfo, getDeviceStats, getSubnetMask, parseDeviceStat } from "./dev-stat"
 import { getDeviceStat } from "../connection";
 
 jest.mock('../connection');
@@ -58,6 +58,25 @@ IP6.ROUTE[1]:                           dst = fe80::/64, nh = ::, mt = 100`;
         expect(subnet).toBe("255.255.255.0");
     })
 
+    describe("device address extraction", () => {
+        const commonInputRecord: Record<string, string> = {
+            "GENERAL.DEVICE": "eth0",
+            "GENERAL.TYPE": "ethernet",
+            "GENERAL.HWADDR": "48:B0:2D:D8:BC:D2",
+            "GENERAL.MTU": "1500",
+            "GENERAL.STATE": "100 (connected)",
+            "GENERAL.CONNECTION": "Wired connection 1",
+            "GENERAL.CON-PATH": "/org/freedesktop/NetworkManager/ActiveConnection/6",
+            "WIRED-PROPERTIES.CARRIER": "on",
+            "IP4.ADDRESS[1]": "192.168.15.83/24",
+            "IP4.GATEWAY": "192.168.15.66",
+            "IP4.ROUTE[1]": "dst = 192.168.15.0/24, nh = 0.0.0.0, mt = 100",
+            "IP4.ROUTE[2]": "dst = 0.0.0.0/0, nh = 192.168.15.66, mt = 100",
+            "IP4.DNS[1]": "8.8.8.8",
+            "IP6.ADDRESS[1]": "fe80::7fb7:1e8f:34da:9c18/64",
+            "IP6.GATEWAY": "--",
+            "IP6.ROUTE[1]": "dst = fe80::/64, nh = ::, mt = 100",
+        };
     test("key/value로 분리된 장치 정보에 대해 IDevAddres 정보로 얻어낸다.", () => {
         const inputRecord: Record<string, string> = {
             "GENERAL.DEVICE": "eth0",
@@ -88,7 +107,40 @@ IP6.ROUTE[1]:                           dst = fe80::/64, nh = ::, mt = 100`;
         }
         const result = extractDevAddress(inputRecord);
         expect(result).toEqual(expectedOutput);
-    })
+    }),
+
+    test("key/value로 분리된 장치 정보에 대해 IDevAddres6 정보로 얻어낸다.", () => {
+        const inputRecord: Record<string, string> = {
+            "GENERAL.DEVICE": "eth0",
+            "GENERAL.TYPE": "ethernet",
+            "GENERAL.HWADDR": "48:B0:2D:D8:BC:D2",
+            "GENERAL.MTU": "1500",
+            "GENERAL.STATE": "100 (connected)",
+            "GENERAL.CONNECTION": "Wired connection 1",
+            "GENERAL.CON-PATH": "/org/freedesktop/NetworkManager/ActiveConnection/6",
+            "WIRED-PROPERTIES.CARRIER": "on",
+            "IP4.ADDRESS[1]": "192.168.15.83/24",
+            "IP4.GATEWAY": "192.168.15.66",
+            "IP4.ROUTE[1]": "dst = 192.168.15.0/24, nh = 0.0.0.0, mt = 100",
+            "IP4.ROUTE[2]": "dst = 0.0.0.0/0, nh = 192.168.15.66, mt = 100",
+            "IP4.DNS[1]": "8.8.8.8",
+            "IP6.ADDRESS[1]": "fe80::7fb7:1e8f:34da:9c18/64",
+            "IP6.GATEWAY": "--",
+            "IP6.ROUTE[1]": "dst = fe80::/64, nh = ::, mt = 100",
+        };
+
+        const expectedOutput: IDevAddressV6 = {
+            device: "eth0",
+            address: "fe80::7fb7:1e8f:34da:9c18",
+            subnetPrefix: 64,
+            gateway: "",
+            dns: [],
+            mac: "48:B0:2D:D8:BC:D2"
+        }
+        const result = extractDevAddressV6(inputRecord);
+        expect(result).toEqual(expectedOutput);
+    })    
+})
 
     test("NetworkInfo 리스트를 통해 장치의 IDevAddress 리스트를 얻어내야 한다.", async () => {
 
