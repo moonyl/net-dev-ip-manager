@@ -17,7 +17,8 @@
     "test:integ": "jest --config=jest.integration.config.js",
     "clean": "node tools/cleanup",
     "prepack": "echo 'Ensuring lib directory exists before packing'",
-    "package": "npm run build && npm pack"
+    "package": "npm run build && npm pack",
+    "prepublishOnly": "npm run package"
   },
   "files": [
     "lib/**/*"
