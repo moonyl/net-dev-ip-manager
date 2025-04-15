@@ -1,6 +1,6 @@
 {
   "name": "net-dev-ip-manager",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Modules that manage IP-related settings for network devices",
   "main": "./lib/cjs",
   "module": "./lib/esm",
