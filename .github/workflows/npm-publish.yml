@@ -16,6 +16,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: master
       - uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -28,7 +30,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: Update package.json version to ${{ steps.get_tag.outputs.RELEASE_TAG }}"
-          files: package.json
+          file_pattern: package.json
   build:
     needs: update-version
     runs-on: ubuntu-22.04
