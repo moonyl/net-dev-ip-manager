@@ -1,6 +1,6 @@
 import { NetworkInfo, getNetworkInfoFromConnections } from "./connection";
-import { formatDevAddress, IDevAddressToWrite } from "./dev-modify";
-import { getDeviceStats, getDeviceV6Stats, IDevAddress } from "./dev-stat";
+import { formatDevAddress, IDevAddressToWrite, IDevAddressV6ToWrite } from "./dev-modify";
+import { getDeviceStats, getDeviceV6Stats, IDevAddress, IDevAddressV6 } from "./dev-stat";
 
 export {
     NetworkInfo,
@@ -9,5 +9,7 @@ export {
     getDeviceV6Stats,
     IDevAddress,
     formatDevAddress,
-    IDevAddressToWrite
+    IDevAddressToWrite,
+    IDevAddressV6,
+    IDevAddressV6ToWrite
 };
